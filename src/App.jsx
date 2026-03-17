@@ -20,7 +20,7 @@ import { findBestGrouping } from "./utils/grouping";
 const GROUP_COLORS = ["#FF4500", "#FFA500", "#87CEFA"];
 
 // 友好度CSVのパス(publicフォルダ直下)
-const CSV_PATH = "/sample.csv";
+const CSV_PATH = import.meta.env.BASE_URL + "sample.csv";
 
 /**
  * 人口データとグルーピング結果をまとめて取得するカスタムフック
