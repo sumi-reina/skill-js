@@ -25,7 +25,9 @@ function getAllAssignments(prefCount, maxGroups) {
       num = Math.floor(num / maxGroups);
     }
 
-    // グループが3つ以下になるパターンのみ有効(0,1,2が連続して使われているか確認)
+    // グループが3つ以下になるパターンのみ有効(0から連続で使われているかのチェック)
+    // 例: [0, 0, 1, 2, 0] → Set{0, 1, 2}
+    // 例: [0, 0, 2, 0, 0] → Set{0, 2} ← 1が飛んでいる（除外対象）
     const usedGroups = new Set(assignment);
     // グループ番号が飛び番にならないよう正規化されているか確認する
     let isValid = true;
@@ -39,7 +41,7 @@ function getAllAssignments(prefCount, maxGroups) {
 }
 
 // 都県名のグループ配列に変換する
-// 例: assignment=[0,0,1,1,2] → groups=[["東京都","神奈川県"], ["埼玉県","千葉県"], ["茨城県"]]
+// 例: assignment=[0, 0, 1, 2, 0, 1, 2, 0] → groups=[["東京都","神奈川県"], ["埼玉県","千葉県"], ["茨城県"]]
 function assignmentToGroups(prefs, assignment) {
   const groups = {};
   assignment.forEach((groupIndex, i) => {
